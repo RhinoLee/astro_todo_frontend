@@ -1,22 +1,42 @@
 <script setup lang="ts">
 import LinkButton from "@components/ui/LinkButton.vue";
 import deleteIcon from "@assets/icon/delete_icon.svg";
-import { getTodosAPI } from "@services/todo/index";
+import { getTodosAPI, deleteTodoAPI } from "@services/todo/index";
 import type { TodoResSchema } from "@type/todo";
+import { ref, watch, type Ref } from "vue";
 
 interface Props {
   todos: TodoResSchema[];
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
+const todos: Ref<TodoResSchema[]> = ref([]);
 
 async function updateList() {
   try {
-    await getTodosAPI();
+    const result = await getTodosAPI();
+    todos.value = result.data.data;
   } catch (err) {
     console.log(err);
   }
 }
+
+async function deleteHandler(id: number) {
+  try {
+    await deleteTodoAPI(id);
+    await updateList();
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+watch(
+  () => props.todos,
+  (val) => {
+    todos.value = val;
+  },
+  { immediate: true },
+);
 </script>
 
 <template>
@@ -48,7 +68,12 @@ async function updateList() {
               }}</a>
             </td>
             <td class="flex items-center justify-center w-[24px]">
-              <img :src="deleteIcon.src" class="w-[18px]" alt="delete" />
+              <img
+                :src="deleteIcon.src"
+                @click="deleteHandler(todo.id)"
+                class="w-[18px] cursor-pointer"
+                alt="delete"
+              />
             </td>
           </tr>
         </tbody>

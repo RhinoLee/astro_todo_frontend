@@ -16,3 +16,7 @@ export const createTodoAPI = (data: TodoSchema) => {
 export const updateTodoAPI = (data: TodoSchema, id: number) => {
   return $axios.put(`/todos/${id}`, data);
 };
+
+export const deleteTodoAPI = (id: number) => {
+  return $axios.delete(`/todos/${id}`);
+};

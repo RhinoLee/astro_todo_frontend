@@ -1,6 +1,18 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
+import Table from "@components/todo/Table.vue";
+import { getTodosAPI } from "@services/todo";
+import type { TodoResSchema } from "@type/todo";
+
+let todos: TodoResSchema[] = [];
+try {
+  const reuslt = await getTodosAPI();
+  todos = reuslt.data.data ?? [];
+} catch (err) {
+  console.log(err);
+}
 ---
+
 <BaseLayout>
-	<h1>Astroooo</h1>
+  <Table todos={todos} />
 </BaseLayout>

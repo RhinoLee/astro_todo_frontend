@@ -1,6 +1,7 @@
 ---
+export const prerender = false;
 import BaseLayout from "@layouts/BaseLayout.astro";
-import Table from "@components/todo/Table.vue";
+import TodoList from "@components/todo/TodoList.vue";
 import { getTodosAPI } from "@services/todo";
 import type { TodoResSchema } from "@type/todo";
 
@@ -14,5 +15,5 @@ try {
 ---
 
 <BaseLayout>
-  <Table todos={todos} />
+  <TodoList client:load todos={todos} />
 </BaseLayout>

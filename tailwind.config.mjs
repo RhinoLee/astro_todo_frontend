@@ -7,6 +7,7 @@ export default {
         "main-blue": "#22ABE6",
         "gray-1": "#E1E1E1",
         "gray-2": "#848484",
+        "gray-3": "#F4F4F4",
         "black-1": "#262626",
       },
     },

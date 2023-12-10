@@ -60,7 +60,7 @@ watch(
       <LinkButton href="/create">新增</LinkButton>
     </div>
     <div class="table-fixed w-full">
-      <table class="w-full">
+      <table>
         <thead>
           <tr>
             <th class="w-[30px]"></th>
@@ -68,8 +68,12 @@ watch(
             <th class="w-[24px]"></th>
           </tr>
         </thead>
-        <tbody class="text-[1.3rem] text-black-1">
-          <tr v-for="todo in todos" :key="todo.id" class="h-[28px]">
+        <tbody class="flex flex-wrap w-[800px] text-[1.3rem] text-black-1">
+          <tr
+            v-for="todo in todos"
+            :key="todo.id"
+            class="flex py-[.3rem] w-full h-[3rem] hover:bg-gray-3"
+          >
             <td class="flex items-center justify-center w-[30px]">
               <input
                 type="checkbox"
@@ -84,10 +88,12 @@ watch(
                 class="w-[20px] h-[20px] cursor-pointer"
               />
             </td>
-            <td class="px-[1.3rem] cursor-pointer">
-              <a :href="`/todos/todo/${todo.id}`" class="block">{{
-                todo.title
-              }}</a>
+            <td class="flex-1 flex items-center px-[1.3rem]">
+              <a
+                :href="`/todos/todo/${todo.id}`"
+                class="block w-full cursor-pointer"
+                >{{ todo.title }}</a
+              >
             </td>
             <td class="flex items-center justify-center w-[24px]">
               <img

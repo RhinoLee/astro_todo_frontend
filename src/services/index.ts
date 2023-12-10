@@ -1,8 +1,8 @@
-import axios from 'axios'
+import axios from "axios";
 
-const BASE_URL = 'http://localhost:5003'
+const BASE_URL = import.meta.env.PUBLIC_BACKEND_API;
 const $axios = axios.create({
-  baseURL: BASE_URL
-})
+  baseURL: BASE_URL,
+});
 
-export default $axios
+export default $axios;

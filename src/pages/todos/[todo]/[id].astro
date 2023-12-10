@@ -1,0 +1,21 @@
+---
+export const prerender = false;
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Form from "@components/todo/Form.vue";
+import { getTodoAPI } from "@services/todo/index";
+import type { TodoResSchema } from "@type/todo";
+
+const { id } = Astro.params;
+
+let todo: TodoResSchema | null = null;
+try {
+  const reuslt = await getTodoAPI(Number(id));
+  todo = reuslt.data.data ?? null;
+} catch (err) {
+  console.log(err);
+}
+---
+
+<BaseLayout>
+  <Form client:load todo={todo} />
+</BaseLayout>

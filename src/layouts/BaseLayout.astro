@@ -1,25 +1,22 @@
 ---
-import Header from '@components/Header.vue'
-import Footer from '@components/Footer.vue'
+import Header from "@components/Header.vue";
+import Footer from "@components/Footer.vue";
 ---
 
-<html lang="en">
+<html lang="en" class="w-full h-full text-[12px]">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>Document</title>
   </head>
-  <body>
-    <Header></Header>
-    <slot />
-    <Footer></Footer>
+  <body class="w-full h-full">
+    <div class="flex flex-col h-full">
+      <Header />
+      <div class="container m-auto flex-1 pt-[40px] pb-[40px]">
+        <slot />
+      </div>
+      <Footer />
+    </div>
   </body>
 </html>
-
-<script>
-  // import axios from 'axios'
-  // axios.post('http://localhost:5003/todo/create', { title: '123', status: 0 }).then((response) => {
-  //   console.log(response.data)
-  // })
-</script>

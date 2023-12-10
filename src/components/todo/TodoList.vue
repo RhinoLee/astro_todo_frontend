@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import LinkButton from "@components/ui/LinkButton.vue";
 import deleteIcon from "@assets/icon/delete_icon.svg";
-import { getTodosAPI, deleteTodoAPI } from "@services/todo/index";
+import {
+  getTodosAPI,
+  deleteTodoAPI,
+  updateTodoStatusAPI,
+} from "@services/todo/index";
 import type { TodoResSchema } from "@type/todo";
 import { ref, watch, type Ref } from "vue";
 
@@ -30,6 +34,17 @@ async function deleteHandler(id: number) {
   }
 }
 
+async function checkHandler(status: boolean, id: number) {
+  const statusNum = status ? 1 : 0;
+
+  try {
+    await updateTodoStatusAPI({ status: statusNum }, id);
+    await updateList();
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 watch(
   () => props.todos,
   (val) => {
@@ -41,7 +56,7 @@ watch(
 
 <template>
   <div class="m-auto w-[800px]">
-    <div class="border-b border-gray-1 mb-[1.5rem]">
+    <div class="flex justify-end border-b border-gray-1 mb-[1.5rem]">
       <LinkButton href="/create">新增</LinkButton>
     </div>
     <div class="table-fixed w-full">
@@ -58,6 +73,13 @@ watch(
             <td class="flex items-center justify-center w-[30px]">
               <input
                 type="checkbox"
+                @change="
+                  ($event) =>
+                    checkHandler(
+                      ($event.target as HTMLInputElement).checked,
+                      todo.id,
+                    )
+                "
                 :checked="Boolean(todo.status)"
                 class="w-[20px] h-[20px] cursor-pointer"
               />

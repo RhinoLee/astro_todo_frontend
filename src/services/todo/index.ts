@@ -1,5 +1,5 @@
 import $axios from "@services/index";
-import type { TodoSchema } from "@type/todo";
+import type { TodoSchema, TodoStatus } from "@type/todo";
 
 export const getTodosAPI = () => {
   return $axios.get("/todos");
@@ -15,6 +15,10 @@ export const createTodoAPI = (data: TodoSchema) => {
 
 export const updateTodoAPI = (data: TodoSchema, id: number) => {
   return $axios.put(`/todos/${id}`, data);
+};
+
+export const updateTodoStatusAPI = (data: TodoStatus, id: number) => {
+  return $axios.patch(`/todos/${id}`, data);
 };
 
 export const deleteTodoAPI = (id: number) => {

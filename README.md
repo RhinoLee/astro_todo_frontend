@@ -1,47 +1,36 @@
-# Astro Starter Kit: Minimal
+# Astro ToDoList
 
-```sh
-npm create astro@latest -- --template minimal
-```
+## 連結
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
+網站：[http://3.139.77.220/](http://3.139.77.220/)
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+GitHub Repo：[https://github.com/RhinoLee/astro_todo_frontend](https://github.com/RhinoLee/astro_todo_frontend)
 
-## 🚀 Project Structure
+## 路由設定
 
-Inside of your Astro project, you'll see the following folders and files:
+| route           | desc              | render mode |
+| --------------- | ----------------- | ----------- |
+| /               | 首頁（todo 列表） | SSR         |
+| /create         | 新增頁面          | SSG         |
+| /todos/todo/:id | 編輯頁面          | SSR         |
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+### output: hybrid
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+預設所有路由都是 SSG，在頁面檔案加上 `export const prerender = false;` 讓對應的路由使用 SSR。
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+如果要在 server runtime 動態生成頁面，需要 adapter，這邊使用 @astrojs/node。
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Components - 主要元件
 
-## 🧞 Commands
+| name         | desc                               | mode                   |
+| ------------ | ---------------------------------- | ---------------------- |
+| Form.vue     | 編輯/新增表單元件                  | hydration(client:load) |
+| TodoList.vue | todo 列表，有 checked, delete 功能 | hydration(client:load) |
+| Header.vue   | Header                             | 100% HTML              |
+| Footer.vue   | Footer                             | 100% HTML              |
 
-All commands are run from the root of the project, from a terminal:
+### Flow
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+![Astro_todo_flow_1.png](./Astro_todo_flow_1.png)
 
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+---

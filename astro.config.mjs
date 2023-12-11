@@ -1,4 +1,4 @@
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config";
 import node from "@astrojs/node";
 import vue from "@astrojs/vue";
 
@@ -8,7 +8,7 @@ import tailwind from "@astrojs/tailwind";
 export default defineConfig({
   output: "hybrid",
   adapter: node({
-    mode: "standalone"
+    mode: "standalone",
   }),
-  integrations: [vue(), tailwind()]
+  integrations: [vue(), tailwind()],
 });
